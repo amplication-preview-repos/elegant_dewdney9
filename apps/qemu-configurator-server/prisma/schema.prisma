@@ -1,0 +1,57 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DB_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Configuration {
+  additionalParams String?
+  arch             String?
+  bootDrive        EnumConfigurationBootDrive?
+  cdrom            String?
+  cpus             Int?
+  createdAt        DateTime                    @default(now())
+  enableKvm        Boolean?
+  floppy           String?
+  hdd              String?
+  id               String                      @id @default(cuid())
+  memory           Int?
+  name             String?
+  soundCard        EnumConfigurationSoundCard?
+  uefiFirmware     String?
+  updatedAt        DateTime                    @updatedAt
+  videoCard        EnumConfigurationVideoCard?
+}
+
+model Architecture {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model Hardware {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+model AdditionalSettings {
+  createdAt DateTime @default(now())
+  id        String   @id @default(cuid())
+  updatedAt DateTime @updatedAt
+}
+
+enum EnumConfigurationBootDrive {
+  Option1
+}
+
+enum EnumConfigurationSoundCard {
+  Option1
+}
+
+enum EnumConfigurationVideoCard {
+  Option1
+}
